@@ -1,13 +1,20 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 import About from "./Pages/About/About";
-import Appoinment from "./Pages/Home/Appoinment";
+import Apoinment from "./Pages/Apoinment/Apoinment";
 import ContactUs from "./Pages/Home/ContactUs";
 import Home from "./Pages/Home/Home";
 import Reviews from "./Pages/Home/Reviews";
-import Footer from "./Pages/Shared/Footer";
 import Login from "./Pages/Shared/Login";
 import Navbar from "./Pages/Shared/Navbar";
+import PrivateRoute from "./Pages/Shared/PrivateRoute";
+import SignUp from "./Pages/Shared/SignUp";
+import DashBoard from "./Pages/DashBoard/DashBoard";
+import MyAppoinmnets from "./Pages/DashBoard/MyAppoinmnets";
+import MyReview from "./Pages/DashBoard/MyReview";
 
 function App() {
   return (
@@ -17,12 +24,31 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/appoinment' element={<Appoinment />} />
+        <Route
+          path='/appoinment'
+          element={
+            <PrivateRoute>
+              <Apoinment />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/dashboard'
+          element={
+            <PrivateRoute>
+              <DashBoard />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<MyAppoinmnets></MyAppoinmnets>}></Route>
+          <Route path='review' element={<MyReview></MyReview>}></Route>
+        </Route>
         <Route path='/reviews' element={<Reviews />} />
         <Route path='/contactUs' element={<ContactUs />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
-      <Footer></Footer>
+      <ToastContainer />
     </div>
   );
 }

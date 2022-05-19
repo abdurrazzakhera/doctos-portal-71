@@ -6,8 +6,8 @@ const Footer = () => {
   const date = new Date();
   return (
     <div className='px-12'>
-      <div className='flex justify-between px-16 pb-16'>
-        <div>
+      <div className='lg:flex   justify-between lg:px-16 pb-16'>
+        <div className='mx-auto'>
           <h3 className=' uppercase mb-2 font-bold text-gray-500'>Services</h3>
           <ul>
             <li>Emergency Checkup</li>

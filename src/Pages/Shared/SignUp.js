@@ -1,58 +1,77 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "./Loading";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, pUpdating, pError] = useUpdateProfile(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  let navigate = useNavigate();
-  let location = useLocation();
-  let from = location.state?.from?.pathname || "/";
-  useEffect(() => {
-    if (user || gUser) {
-      navigate(from, { replace: true });
-    }
-  }, [user, gUser, from, navigate]);
-
-  //location replace
-
+  const navigate = useNavigate();
   let singInError;
-  if (loading || gLoading) {
+  if (loading || gLoading || pUpdating) {
   }
   if (loading || gLoading) {
     return <Loading></Loading>;
   }
-
-  if (error || gError) {
+  if (error || gError || pError) {
     singInError = (
       <p className='text-red-600 text-base pb-5 font-medium'>
-        {error?.message || gError?.message}
+        {error?.message || gError?.message || pError.message}
       </p>
     );
   }
-
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
-    // navigate("/appoinment");
+  if (user || gUser) {
+    console.log(user || gUser);
+  }
+  const onSubmit = async (data) => {
+    // console.log(data);
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    console.log("uppdatting user");
+    navigate("/appoinment");
   };
   return (
     <div className='flex h-screen justify-center items-center'>
       <div className='card w-96 bg-base-100 shadow-xl'>
         <div className='card-body'>
-          <h2 className=''>Login</h2>
+          <h2 className=''>Sing Up</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='form-control w-full max-w-xs'>
+              <label className='label'>
+                <span className='label-text'>Your Name</span>
+              </label>
+              <input
+                type='text'
+                placeholder='Type Your Name'
+                className='input input-bordered w-full max-w-xs'
+                {...register("name", {
+                  required: {
+                    value: true,
+                    message: "Please Type Your Name",
+                  },
+                })}
+              />
+              <label className='label'>
+                {errors.name?.type === "required" && (
+                  <span className='label-text-alt text-red-600'>
+                    {errors?.name?.message}
+                  </span>
+                )}
+              </label>
+            </div>
             <div className='form-control w-full max-w-xs'>
               <label className='label'>
                 <span className='label-text'>Email</span>
@@ -91,7 +110,7 @@ const Login = () => {
               </label>
               <input
                 type='password'
-                placeholder='Type Your Email'
+                placeholder='Type Your Password'
                 className='input input-bordered w-full max-w-xs'
                 {...register("password", {
                   required: {
@@ -126,13 +145,13 @@ const Login = () => {
             <input
               className='btn input-bordered w-full max-w-xs '
               type='submit'
-              value='Log In'
+              value='Sing Up'
             />
           </form>
           <p>
-            New to Doctors Portal?{" "}
-            <Link className='text-secondary' to='/signup'>
-              Create new account
+            Allready in Doctors Portal?{" "}
+            <Link className='text-secondary' to='/login'>
+              Log In
             </Link>
           </p>
           <div className='divider'>OR</div>
@@ -148,4 +167,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
