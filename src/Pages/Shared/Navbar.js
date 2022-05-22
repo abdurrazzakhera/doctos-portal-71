@@ -6,12 +6,13 @@ import auth from "../../firebase.init";
 import Loading from "./Loading";
 
 const Navbar = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   if (loading) {
     return <Loading></Loading>;
   }
   const logOut = () => {
     signOut(auth);
+    localStorage.removeItem("accessToken");
   };
   const navbarComp = (
     <>

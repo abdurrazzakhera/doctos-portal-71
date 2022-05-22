@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Loading from "../Shared/Loading";
 import BookingModal from "./BookingModal";
@@ -8,7 +8,7 @@ import Service from "./Service";
 const AvailAbilApoinments = ({ date }) => {
   // const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
-  console.log(date);
+  // console.log(date);
   const fomatedDate = date && format(date, "PP");
 
   //React use Query use

@@ -15,6 +15,10 @@ import SignUp from "./Pages/Shared/SignUp";
 import DashBoard from "./Pages/DashBoard/DashBoard";
 import MyAppoinmnets from "./Pages/DashBoard/MyAppoinmnets";
 import MyReview from "./Pages/DashBoard/MyReview";
+import MyHistory from "./Pages/DashBoard/MyHistory";
+import AllUsers from "./Pages/DashBoard/AllUsers";
+import RequirAdmin from "./Pages/Shared/RequirAdmin";
+import AddDoctor from "./Pages/DashBoard/AddDoctor";
 
 function App() {
   return (
@@ -42,6 +46,23 @@ function App() {
         >
           <Route index element={<MyAppoinmnets></MyAppoinmnets>}></Route>
           <Route path='review' element={<MyReview></MyReview>}></Route>
+          <Route path='history' element={<MyHistory></MyHistory>}></Route>
+          <Route
+            path='alluser'
+            element={
+              <RequirAdmin>
+                <AllUsers></AllUsers>
+              </RequirAdmin>
+            }
+          ></Route>
+          <Route
+            path='adddoctor'
+            element={
+              <RequirAdmin>
+                <AddDoctor></AddDoctor>
+              </RequirAdmin>
+            }
+          ></Route>
         </Route>
         <Route path='/reviews' element={<Reviews />} />
         <Route path='/contactUs' element={<ContactUs />} />
