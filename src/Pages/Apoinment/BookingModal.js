@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
-  const { _id, name, slots } = treatment;
+  const { _id, name, slots, price } = treatment;
   const [user, loading] = useAuthState(auth);
   const fomatedDate = format(date, "PP");
   const handelAppoinmtn = (event) => {
@@ -21,6 +21,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       treatment: name,
       date: fomatedDate,
       slottime,
+      price,
       patient: user.email,
       patientName: user.displayName,
       phone: event.target.phone.value,
@@ -28,7 +29,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
     console.log(booking);
 
     // fetch data send in backend
-    fetch("http://localhost:5000/booking", {
+    fetch("https://secret-bastion-89260.herokuapp.com/booking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,6 +71,13 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
               name='date'
               readOnly
               value={format(date, "PP")}
+              className='input input-bordered w-full max-w-xs'
+            />
+            <input
+              type='text'
+              name='date'
+              readOnly
+              value={price}
               className='input input-bordered w-full max-w-xs'
             />
             <select

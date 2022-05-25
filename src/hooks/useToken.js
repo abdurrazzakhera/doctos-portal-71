@@ -7,7 +7,7 @@
 //     const currentUser = { email: email };
 //     console.log("auto sync");
 //     // fetch the data to put backend
-//     fetch(`http://localhost:5000/user/${email}`, {
+//     fetch(`https://secret-bastion-89260.herokuapp.com/user/${email}`, {
 //       method: "PUT",
 //       headers: {
 //         "content-type": "application/json",
@@ -36,7 +36,7 @@ const useToken = (user) => {
 
     if (email) {
       console.log(email);
-      fetch(`http://localhost:5000/user/${email}`, {
+      fetch(`https://secret-bastion-89260.herokuapp.com/user/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

@@ -15,7 +15,9 @@ const AddDoctor = () => {
   const imgStorageKey = "b1f022ee7105e8edda803c03f91eacfa";
 
   const { data: services, isLoading } = useQuery("services", () =>
-    fetch("http://localhost:5000/service").then((res) => res.json())
+    fetch("https://secret-bastion-89260.herokuapp.com/service").then((res) =>
+      res.json()
+    )
   );
 
   const onSubmit = async (data) => {
@@ -40,7 +42,7 @@ const AddDoctor = () => {
           };
           console.log(doctor);
           //send tho database
-          fetch("http://localhost:5000/doctor", {
+          fetch("https://secret-bastion-89260.herokuapp.com/doctor", {
             method: "POST",
             headers: {
               "content-type": "application/json",

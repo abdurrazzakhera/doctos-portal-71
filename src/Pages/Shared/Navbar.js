@@ -17,7 +17,7 @@ const Navbar = () => {
   const navbarComp = (
     <>
       <li>
-        <Link to='/home'>Home</Link>
+      <Link to='/home'>Home</Link>
       </li>
       <li tabIndex='0'>
         <Link to='/About'>About</Link>

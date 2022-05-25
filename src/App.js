@@ -19,6 +19,8 @@ import MyHistory from "./Pages/DashBoard/MyHistory";
 import AllUsers from "./Pages/DashBoard/AllUsers";
 import RequirAdmin from "./Pages/Shared/RequirAdmin";
 import AddDoctor from "./Pages/DashBoard/AddDoctor";
+import ManageDoctor from "./Pages/DashBoard/ManageDoctor";
+import Payment from "./Pages/DashBoard/Payment";
 
 function App() {
   return (
@@ -47,6 +49,7 @@ function App() {
           <Route index element={<MyAppoinmnets></MyAppoinmnets>}></Route>
           <Route path='review' element={<MyReview></MyReview>}></Route>
           <Route path='history' element={<MyHistory></MyHistory>}></Route>
+          <Route path='payment/:id' element={<Payment />}></Route>
           <Route
             path='alluser'
             element={
@@ -60,6 +63,14 @@ function App() {
             element={
               <RequirAdmin>
                 <AddDoctor></AddDoctor>
+              </RequirAdmin>
+            }
+          ></Route>
+          <Route
+            path='managedoctor'
+            element={
+              <RequirAdmin>
+                <ManageDoctor></ManageDoctor>
               </RequirAdmin>
             }
           ></Route>

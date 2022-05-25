@@ -17,15 +17,15 @@ const AvailAbilApoinments = ({ date }) => {
     isLoading,
     refetch,
   } = useQuery(["avaiableService", fomatedDate], () =>
-    fetch(`http://localhost:5000/avaiableService?date=${fomatedDate}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://secret-bastion-89260.herokuapp.com/avaiableService?date=${fomatedDate}`
+    ).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading></Loading>;
   }
   // useEffect(() => {
-  // fetch(`http://localhost:5000/avaiableService?date=${fomatedDate}`)
+  // fetch(`https://secret-bastion-89260.herokuapp.com/avaiableService?date=${fomatedDate}`)
   //   .then((res) => res.json())
   //     .then((data) => setServices(data));
   // }, [fomatedDate]);

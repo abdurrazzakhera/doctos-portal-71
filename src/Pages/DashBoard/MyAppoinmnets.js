@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 
@@ -14,12 +14,15 @@ const MyAppoinmnets = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/booking?patient=${patient}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://secret-bastion-89260.herokuapp.com/booking?patient=${patient}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => {
         console.log("res", res);
         if (res.status === 401 || res.status === 403) {
@@ -51,6 +54,7 @@ const MyAppoinmnets = () => {
               <th>Treatment</th>
               <th>Date</th>
               <th>Time Slot</th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
@@ -63,6 +67,28 @@ const MyAppoinmnets = () => {
                 <td>{appointment.treatment}</td>
                 <td>{appointment.date}</td>
                 <td>{appointment.slottime}</td>
+                <td>
+                  {appointment.price && !appointment.paid && (
+                    <Link to={`/dashboard/payment/${appointment._id}`}>
+                      <button className='btn btn-primary btn-xs'>Pay</button>
+                    </Link>
+                  )}
+                  {appointment.price && appointment.paid && (
+                    <div>
+                      <p>
+                        <span className='bg-primary text-lg px-2 py-1 font-bold rounded-lg text-white'>
+                          Paid
+                        </span>
+                      </p>
+                      <p>
+                        Transection Id :
+                        <span className='text-primary'>
+                          {appointment.transectionId}
+                        </span>
+                      </p>
+                    </div>
+                  )}
+                </td>
               </tr>
             ))}
             {/* <th>1</th>
