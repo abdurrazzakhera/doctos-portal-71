@@ -27,11 +27,11 @@ function App() {
     <div>
       <Navbar></Navbar>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/about' element={<About />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route
-          path='/appoinment'
+          path="/appoinment"
           element={
             <PrivateRoute>
               <Apoinment />
@@ -39,7 +39,7 @@ function App() {
           }
         />
         <Route
-          path='/dashboard'
+          path="/dashboard"
           element={
             <PrivateRoute>
               <DashBoard />
@@ -47,11 +47,11 @@ function App() {
           }
         >
           <Route index element={<MyAppoinmnets></MyAppoinmnets>}></Route>
-          <Route path='review' element={<MyReview></MyReview>}></Route>
-          <Route path='history' element={<MyHistory></MyHistory>}></Route>
-          <Route path='payment/:id' element={<Payment />}></Route>
+          <Route path="review" element={<MyReview></MyReview>}></Route>
+          <Route path="history" element={<MyHistory></MyHistory>}></Route>
+          <Route path="payment/:id" element={<Payment />}></Route>
           <Route
-            path='alluser'
+            path="alluser"
             element={
               <RequirAdmin>
                 <AllUsers></AllUsers>
@@ -59,7 +59,7 @@ function App() {
             }
           ></Route>
           <Route
-            path='adddoctor'
+            path="adddoctor"
             element={
               <RequirAdmin>
                 <AddDoctor></AddDoctor>
@@ -67,7 +67,7 @@ function App() {
             }
           ></Route>
           <Route
-            path='managedoctor'
+            path="managedoctor"
             element={
               <RequirAdmin>
                 <ManageDoctor></ManageDoctor>
@@ -75,10 +75,10 @@ function App() {
             }
           ></Route>
         </Route>
-        <Route path='/reviews' element={<Reviews />} />
-        <Route path='/contactUs' element={<ContactUs />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<SignUp />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <ToastContainer />
     </div>
